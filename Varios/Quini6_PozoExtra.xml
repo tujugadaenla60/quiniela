@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<sorteo numero="" fecha="2020-06-07 21:30:00">
+	<juego idT="13" nombre="Quini 6" tipoJuego="Pozo extra" canal="quini_6">
+		<dato nombre="numeros" >
+			<pos id="1">1</pos>
+			<pos id="2">9</pos>
+			<pos id="3">20</pos>
+			<pos id="4">23</pos>
+			<pos id="5">40</pos>
+			<pos id="6">42</pos>
+			<pos id="7">0</pos>
+			<pos id="8">3</pos>
+			<pos id="9">28</pos>
+			<pos id="10">33</pos>
+			<pos id="11">45</pos>
+			<pos id="12">11</pos>
+			<pos id="13">16</pos>
+			<pos id="14">29</pos>
+			<pos id="15">31</pos>
+			<pos id="16">36</pos>
+			<pos id="17"></pos>
+			<pos id="18"></pos>
+		</dato>
+		<premio id="109" nombre="6 aciertos" >
+			<ganadores>195</ganadores>
+			<importe>25641</importe>
+		</premio>
+	</juego>
+</sorteo>

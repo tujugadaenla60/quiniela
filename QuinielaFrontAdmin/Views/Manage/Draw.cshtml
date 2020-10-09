@@ -1,0 +1,218 @@
+﻿
+@{
+    ViewBag.Title = "Draw";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<QuinielaFrontAdmin.Models.DrawModel>
+    <br />
+<h2>Fechas de Sorteo</h2>
+
+<div class="row">
+    <div class="col-md-3">
+        <label><b>Estado:</b></label>
+        <select id="StatusId" name="StatusId" class="form-control" onchange="Filtrar();">
+            <option value="0">Todos</option>
+            @foreach (var item in ViewBag.Status)
+            {
+                if (Request.QueryString["StatusId"] != null && Request.QueryString["StatusId"].ToString() == item.Id.ToString())
+                {
+                    <option value="@Html.Raw(item.Id)" selected>@Html.Raw(item.Name)</option>
+                }
+                else
+                {
+                    <option value=@Html.Raw(item.Id)>@Html.Raw(item.Name)</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <label><b>Juego:</b></label>
+        <select id="GameId" name="GameId" onchange="Filtrar();" class="form-control">
+            <option value="0">Todos</option>
+            @foreach (var item in ViewBag.Games)
+            {
+                if (Request.QueryString["GameId"] != null && Request.QueryString["GameId"].ToString() == item.Id.ToString())
+                {
+                    <option value="@Html.Raw(item.Id)" selected>@Html.Raw(item.Name)</option>
+                }
+                else
+                {
+                    <option value=@Html.Raw(item.Id)>@Html.Raw(item.Name)</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-md-2">
+        <label><b>Desde/Hasta:</b></label>
+    </div>
+    <div class="col-md-2">
+        <input type="date" name="Desde" id="Desde" value="@Html.Raw(((Request.QueryString["DateFrom"]) == null) ? DateTime.Now.AddDays(-7).ToString("yyyy-MM-dd") : Request.QueryString["DateFrom"])" class="form-control" />
+    </div>
+    <div class="col-md-2">
+        <input type="date" name="Hasta" id="Hasta" value="@Html.Raw(((Request.QueryString["DateTo"]) == null) ? DateTime.Now.AddDays(7).ToString("yyyy-MM-dd") : Request.QueryString["DateTo"])" class="form-control" />
+    </div>
+</div>
+<div class="row align-items-end">
+    <div class="col-12 text-right">
+        <button type="button" id="btnAgregar" name="btnAgregar" class="btn btn-success" title="Agregar Sorteo" data-target="#editModal" data-toggle="modal">Agregar</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <table id="data_tables" class="table dataTable no-footer" role="grid" aria-describedby="data_table_info">
+            <thead>
+                <tr role="row">
+                    <th class="sorting_asc" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Id: activate to sort column descending" style="width: 64px;">Juego</th>
+                    <th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" style="width: 209px;">Modalidad</th>
+                    <th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending" style="width: 321px;">Fecha</th>
+                    <th class="nosort sorting_disabled" rowspan="1" colspan="1" aria-label="&amp;nbsp;" style="width: 176px;">Nro Sorteo</th>
+                    <th class="nosort sorting_disabled" rowspan="1" colspan="1" aria-label="&amp;nbsp;" style="width: 176px;">Estado</th>
+                    <th class="nosort sorting_disabled text-center" rowspan="1" colspan="1" aria-label="&amp;nbsp;" style="width: 176px;">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    switch (item.Status.Name.ToString())
+                    {
+                        case "Previsto":
+                            ViewBag.ColorJugada = "warning";
+                            break;
+                        case "Sorteado":
+                            ViewBag.ColorJugada = "success";
+                            break;
+                        case "Cancelado":
+                            ViewBag.ColorJugada = "danger";
+                            break;
+                        default:
+                            break;
+                    }
+                <tr role="row">
+                    <td>@Html.Raw(item.Game.Name)</td>
+                    <td>@Html.Raw(item.GameMode.Name)</td>
+                    <td>@Html.Raw(Convert.ToDateTime(item.Date).ToString("dd/MM/yyyy"))</td>
+                    <td>@Html.Raw(item.Number)</td>
+                    <td>
+                        <span class="badge badge-pill badge-@Html.Raw(ViewBag.ColorJugada)">
+                            @Html.Raw(item.Status.Name)
+                        </span>
+                    </td>
+                    <td>
+                        <div class="table-actions text-center">
+                            <a href="#" title="Ver Detalle"><i class="ik ik-edit"></i></a>
+                            <a href="#"><i class="ik ik-trash-2" title="Eliminar"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="modal fade" id="editModal" name="editModal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Agregar Sorteo</h4>
+            </div>
+            <div class="modal-body" id="divDrawTitle">
+                <input type="hidden" id="DrawEditedId" name="DrawEditedId" value="" />
+                <div class="row">
+                    <div class="col-md-3">
+                        <label><b>Juego:</b></label>
+                    </div>
+                    <div class="col-md-9">
+                        <select name="EditedGameId" id="EditedGameId" class="form-control">
+                            @foreach (var item in ViewBag.Games)
+                            {
+                                if (item.Id > 0)
+                                {
+                                    <option value=@Html.Raw(item.Id)>@Html.Raw(item.Name)</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label><b>Fecha:</b></label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="date" id="EditedDate" name="EditedDate" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label><b>Numero:</b></label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" id="EditedNumber" name="EditedNumber" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label><b>Estado:</b></label>
+                    </div>
+                    <div class="col-md-9">
+                        <select name="EditedStatusId" id="EditedStatusId" class="form-control">
+                            @foreach (var item in ViewBag.Status)
+                            {
+                                if (item.Id > 0)
+                                {
+                                    <option value=@Html.Raw(item.Id)>@Html.Raw(item.Name)</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnContinueEdit" type="button" class="btn btn-primary">Agregar</button>
+                <button data-dismiss="modal" type="button" class="btn btn-secondary">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function Filtrar() {
+        var ST = document.getElementById("StatusId").value;
+        var GM = document.getElementById("GameId").value;
+        var Des = document.getElementById("Desde").value;
+        var Has = document.getElementById("Hasta").value;
+        window.location.href = "@Url.Action("Draw", "Manage")" + "?StatusId=" + ST + "&GameId=" + GM + "&DateFrom=" + Des + "&DateTo=" + Has;
+    }
+    $(document).ready(function () {
+        $("#Desde").change(function () {
+            Filtrar();
+        });
+        $("#Hasta").change(function () {
+            Filtrar();
+        });
+    });
+    $("#btnContinueEdit").click(function (e) {
+            e.preventDefault();
+            var Draw = {
+                "Id": $("#DrawEditedId").val(),
+                "GameId": $("#EditedStatusId").val() ,
+                "GameModeId": $("#EditedStatusId").val() ,
+                "StatusId": $("#EditedStatusId").val() ,
+                "PaymentMethodId": $("#PaymentMethodId").val(),
+                "DeliveryOn": $("#DeliveryOn").val()
+            };
+            $.ajax({
+            type: "POST",
+            url: "@Url.Action("SaleOrderUpdate", "Manage")",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ saleOrder: SaleOrder }),
+                success: function (data) {
+                    window.location.reload();
+            },
+            failure: function (errMsg) { alert(errMsg);}
+            });
+        });
+</script>

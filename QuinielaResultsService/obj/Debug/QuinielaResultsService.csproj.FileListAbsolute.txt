@@ -1,0 +1,9 @@
+D:\Trabajo\Quiniela\QuinielaResultsService\bin\Debug\QuinielaResultsService.exe.config
+D:\Trabajo\Quiniela\QuinielaResultsService\bin\Debug\QuinielaResultsService.exe
+D:\Trabajo\Quiniela\QuinielaResultsService\bin\Debug\QuinielaResultsService.pdb
+D:\Trabajo\Quiniela\QuinielaResultsService\obj\Debug\QuinielaResultsService.ProjectInstaller.resources
+D:\Trabajo\Quiniela\QuinielaResultsService\obj\Debug\QuinielaResultsService.csproj.GenerateResource.cache
+D:\Trabajo\Quiniela\QuinielaResultsService\obj\Debug\QuinielaResultsService.csproj.CoreCompileInputs.cache
+D:\Trabajo\Quiniela\QuinielaResultsService\obj\Debug\QuinielaResultsService.exe
+D:\Trabajo\Quiniela\QuinielaResultsService\obj\Debug\QuinielaResultsService.pdb
+D:\Trabajo\Quiniela\QuinielaResultsService\obj\Debug\QuinielaResultsService.csprojAssemblyReference.cache

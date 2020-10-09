@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<sorteo numero="" fecha="2020-06-07 21:30:00">
+	<juego idT="10" nombre="Quini 6" tipoJuego="Segunda vuelta" canal="quini_6">
+		<dato nombre="numeros" >
+			<pos id="1">0</pos>
+			<pos id="2">3</pos>
+			<pos id="3">20</pos>
+			<pos id="4">28</pos>
+			<pos id="5">33</pos>
+			<pos id="6">45</pos>
+		</dato>
+		<premio id="32" nombre="6 aciertos" >
+			<ganadores>VACANTE</ganadores>
+			<importe>20561754</importe>
+		</premio>
+		<premio id="33" nombre="5 aciertos" >
+			<ganadores>8</ganadores>
+			<importe>34784</importe>
+		</premio>
+		<premio id="34" nombre="4 aciertos" >
+			<ganadores>343</ganadores>
+			<importe>243</importe>
+		</premio>
+	</juego>
+</sorteo>

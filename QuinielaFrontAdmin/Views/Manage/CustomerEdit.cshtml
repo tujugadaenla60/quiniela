@@ -1,0 +1,90 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model QuinielaFrontAdmin.Models.CustomerModel
+<section>
+    <div class="row">
+        <div class="col-md-12 card prod-p-card card-green">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="card-body text-white">
+                        <h5><b>Editando Cliente</b></h5>
+                    </div>
+                </div>
+                <div class="col-md-2 card-body">
+                    <img src="~/img/user.jpg" class="rounded-circle" width="100" title="@Html.Raw(Model.Name)">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="hidden" name="hdnCustomerId" id="hdnCustomerId" />
+                    <label><b>Nombre:</b></label>
+                </div>
+                <div class="col-md-8">
+                    <input tye="text" id="Name" name="Name" class="form-control" value="@Html.Raw(Model.Name)" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label><b>Documento:</b></label>
+                </div>
+                <div class="col-md-8">
+                    <input tye="text" id="IdentificationNumber" name="IdentificationNumber" class="form-control" value="@Html.Raw(Model.IdentificationNumber)" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label><b>Email:</b></label>
+                </div>
+                <div class="col-md-8">
+                    <input tye="text" id="Email" name="Email" class="form-control" value="@Html.Raw(Model.Email)" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label><b>Teléfono:</b></label>
+                </div>
+                <div class="col-md-8">
+                    <input tye="text" id="PhoneNumber" name="PhoneNumber" class="form-control" value="@Html.Raw(Model.PhoneNumber)" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="widget bg-danger">
+                    <div class="widget-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="state">
+                                <h6>Saldo</h6>
+                                <h2>$@Html.Raw(Model.Balance)</h2>
+                            </div>
+                            <div class="icon">
+                                <i class="ik ik-award"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <br />
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <button id="btnAceptar" class="btn btn-primary">Aceptar</button>
+            <button id="btnCancelar" class="btn btn-secondary">Cancelar</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            Apuestas Ganadoras Pendientes de Retirar
+        </div>
+    </div>
+</section>

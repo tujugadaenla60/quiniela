@@ -1,0 +1,137 @@
+﻿
+@{
+    ViewBag.Title = "Play";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model List<QuinielaFrontAdmin.Models.PlayModel>
+    <br />
+<h2>Jugadas</h2>
+
+<div class="row">
+    <div class="col-md-3">
+        <label><b>Estado:</b></label>
+        <select id="StatusId" name="StatusId" class="form-control" onchange="Filtrar();">
+            <option value="0">Todos</option>
+            @foreach (var item in ViewBag.Status)
+            {
+                if (Request.QueryString["StatusId"] != null && Request.QueryString["StatusId"].ToString() == item.Id.ToString())
+                {
+                    <option value="@Html.Raw(item.Id)" selected>@Html.Raw(item.Name)</option>
+                }
+                else
+                {
+                    <option value=@Html.Raw(item.Id)>@Html.Raw(item.Name)</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <label><b>Juego:</b></label>
+        <select id="GameId" name="GameId" onchange="Filtrar();" class="form-control">
+            <option value="0">Todos</option>
+            @foreach (var item in ViewBag.Games)
+            {
+                if (Request.QueryString["GameId"] != null && Request.QueryString["GameId"].ToString() == item.Id.ToString())
+                {
+                    <option value="@Html.Raw(item.Id)" selected>@Html.Raw(item.Name)</option>
+                }
+                else
+                {
+                    <option value=@Html.Raw(item.Id)>@Html.Raw(item.Name)</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-md-2">
+        <label><b>Desde/Hasta:</b></label>
+    </div>
+    <div class="col-md-2">
+        <input type="date" name="Desde" id="Desde" value="@Html.Raw(((Request.QueryString["CreatedOnFrom"]) == null) ? DateTime.Now.ToString("yyyy-MM-dd") : Request.QueryString["CreatedOnFrom"])" class="form-control" />
+    </div>
+    <div class="col-md-2">
+        <input type="date" name="Hasta" id="Hasta" value="@Html.Raw(((Request.QueryString["CreatedOnTo"]) == null) ? DateTime.Now.ToString("yyyy-MM-dd") : Request.QueryString["CreatedOnTo"])" class="form-control" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <table id="data_tables" class="table dataTable no-footer" role="grid" aria-describedby="data_table_info">
+            <thead>
+                <tr role="row">
+                    <th class="sorting_asc" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Id: activate to sort column descending" style="width: 64px;">Jugada</th>
+                    <th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" style="width: 209px;">Cliente</th>
+                    <th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending" style="width: 150px;">Juego</th>
+                    <th class="nosort sorting_disabled" rowspan="1" colspan="1" aria-label="&amp;nbsp;" style="width: 176px;">Modalidad</th>
+                    <th class="nosort sorting_disabled" rowspan="1" colspan="1" aria-label="&amp;nbsp;" style="width: 110px;">Nro Sorteo</th>
+                    <th class="nosort sorting_disabled" rowspan="1" colspan="1" aria-label="&amp;nbsp;" style="width: 130px;">Fecha Sorteo</th>
+                    <th class="nosort sorting_disabled" rowspan="1" colspan="1" aria-label="&amp;nbsp;" style="width: 100px;">Apuesta</th>
+                    <th class="nosort sorting_disabled" rowspan="1" colspan="1" aria-label="&amp;nbsp;" style="width: 130px;">Ticket Oficial</th>
+                    <th class="nosort sorting_disabled" rowspan="1" colspan="1" aria-label="&amp;nbsp;" style="width: 80px;">Estado</th>
+                    <th class="nosort sorting_disabled text-center" rowspan="1" colspan="1" aria-label="&amp;nbsp;" style="width: 176px;">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    switch (item.Status.Name.ToString())
+                    {
+                        case "Pendiente":
+                            ViewBag.ColorJugada = "warning";
+                            break;
+                        case "Jugada":
+                            ViewBag.ColorJugada = "success";
+                            break;
+                        case "Cancelada":
+                            ViewBag.ColorJugada = "danger";
+                            break;
+                        case "Ganadora":
+                            ViewBag.ColorJugada = "primary";
+                            break;
+                        case "No Ganadora":
+                            ViewBag.ColorJugada = "secondary";
+                            break;
+                        default:
+                            break;
+                    }
+                <tr role="row">
+                    <td class="sorting_1">@Html.Raw(item.Id)</td>
+                    <td>@Html.Raw(item.Customer.Name)</td>
+                    <td>@Html.Raw(item.Game.Name)</td>
+                    <td>@Html.Raw(item.GameMode.Name)</td>
+                    <td>@Html.Raw(item.Draw.Number)</td>
+                    <td>@Html.Raw(Convert.ToDateTime(item.Draw.Date).ToString("dd/MM/yyyy"))</td>
+                    <td>@Html.Raw("$" + item.Total)</td>
+                    <td>@Html.Raw(item.OfficialTicket)</td>
+                    <td>
+                        <span class="badge badge-pill badge-@Html.Raw(ViewBag.ColorJugada)">
+                            @Html.Raw(item.Status.Name)
+                        </span>
+                    </td>
+                    <td>
+                        <div class="table-actions text-center">
+                            @if (item.Game.Name.Contains("Quini"))
+                            {
+                                <a href="@Url.Action("PlayQuini", "Manage", new { Id = item.Id })" title="Ver Detalle"><i class="ik ik-edit"></i></a>
+                            }
+                            @if (item.Game.Name.Contains("Loto"))
+                            {
+                                <a href="@Url.Action("PlayLoto", "Manage", new { Id = item.Id })" title="Ver Detalle"><i class="ik ik-edit"></i></a>
+                            }
+                            <a href="#"><i class="ik ik-trash-2" title="Eliminar"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function Filtrar() {
+        var ST = document.getElementById("StatusId").value;
+        var GM = document.getElementById("GameId").value;
+        var Des = document.getElementById("Desde").value;
+        var Has = document.getElementById("Hasta").value;
+        window.location.href = "@Url.Action("Play", "Manage")" + "?StatusId=" + ST + "&GameId=" + GM + "&CreatedOnFrom=" + Des + "&CreatedOnTo=" + Has;
+    }
+</script>

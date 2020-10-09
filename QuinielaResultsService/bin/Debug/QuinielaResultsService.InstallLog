@@ -1,0 +1,36 @@
+﻿Instalando ensamblado 'D:\Trabajo\Quiniela\QuinielaResultsService\bin\Debug\QuinielaResultsService.exe'.
+Los parámetros afectados son:
+   logtoconsole = 
+   assemblypath = D:\Trabajo\Quiniela\QuinielaResultsService\bin\Debug\QuinielaResultsService.exe
+   logfile = D:\Trabajo\Quiniela\QuinielaResultsService\bin\Debug\QuinielaResultsService.InstallLog
+Deshaciendo ensamblado 'D:\Trabajo\Quiniela\QuinielaResultsService\bin\Debug\QuinielaResultsService.exe'.
+Los parámetros afectados son:
+   logtoconsole = 
+   assemblypath = D:\Trabajo\Quiniela\QuinielaResultsService\bin\Debug\QuinielaResultsService.exe
+   logfile = D:\Trabajo\Quiniela\QuinielaResultsService\bin\Debug\QuinielaResultsService.InstallLog
+Instalando ensamblado 'D:\Trabajo\Quiniela\QuinielaResultsService\bin\Debug\QuinielaResultsService.exe'.
+Los parámetros afectados son:
+   logtoconsole = 
+   assemblypath = D:\Trabajo\Quiniela\QuinielaResultsService\bin\Debug\QuinielaResultsService.exe
+   logfile = D:\Trabajo\Quiniela\QuinielaResultsService\bin\Debug\QuinielaResultsService.InstallLog
+Instalando el servicio Quiniela Results Service...
+Creando el origen de EventLog Quiniela Results Service en el registro Application...
+Deshaciendo ensamblado 'D:\Trabajo\Quiniela\QuinielaResultsService\bin\Debug\QuinielaResultsService.exe'.
+Los parámetros afectados son:
+   logtoconsole = 
+   assemblypath = D:\Trabajo\Quiniela\QuinielaResultsService\bin\Debug\QuinielaResultsService.exe
+   logfile = D:\Trabajo\Quiniela\QuinielaResultsService\bin\Debug\QuinielaResultsService.InstallLog
+Restaurando el registro de eventos al estado anterior para el origen Quiniela Results Service.
+Instalando ensamblado 'D:\Trabajo\Quiniela\QuinielaResultsService\bin\Debug\QuinielaResultsService.exe'.
+Los parámetros afectados son:
+   logtoconsole = 
+   assemblypath = D:\Trabajo\Quiniela\QuinielaResultsService\bin\Debug\QuinielaResultsService.exe
+   logfile = D:\Trabajo\Quiniela\QuinielaResultsService\bin\Debug\QuinielaResultsService.InstallLog
+Instalando el servicio Quiniela Results Service...
+El servicio Quiniela Results Service se ha instalado correctamente.
+Creando el origen de EventLog Quiniela Results Service en el registro Application...
+Confirmando ensamblado 'D:\Trabajo\Quiniela\QuinielaResultsService\bin\Debug\QuinielaResultsService.exe'.
+Los parámetros afectados son:
+   logtoconsole = 
+   assemblypath = D:\Trabajo\Quiniela\QuinielaResultsService\bin\Debug\QuinielaResultsService.exe
+   logfile = D:\Trabajo\Quiniela\QuinielaResultsService\bin\Debug\QuinielaResultsService.InstallLog

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<sorteo numero="" fecha="2020-06-07 21:30:00">
+	<juego idT="11" nombre="Quini 6" tipoJuego="Revancha" canal="quini_6">
+		<dato nombre="numeros" >
+			<pos id="1">9</pos>
+			<pos id="2">11</pos>
+			<pos id="3">16</pos>
+			<pos id="4">29</pos>
+			<pos id="5">31</pos>
+			<pos id="6">36</pos>
+		</dato>
+		<premio id="36" nombre="6 aciertos" >
+			<ganadores>VACANTE</ganadores>
+			<importe>42092350</importe>
+		</premio>
+	</juego>
+</sorteo>

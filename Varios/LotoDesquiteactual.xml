@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<sorteo numero="" fecha="2020-06-06 22:00:00">
+	<juego idT="14" nombre="Loto Plus" tipoJuego="Desquite" canal="loto">
+		<dato nombre="numeros" >
+			<pos id="1">15</pos>
+			<pos id="2">19</pos>
+			<pos id="3">30</pos>
+			<pos id="4">33</pos>
+			<pos id="5">36</pos>
+			<pos id="6">38</pos>
+		</dato>
+		<dato nombre="Jackpot" >
+			<pos id="1">0</pos>
+			<pos id="2">8</pos>
+		</dato>
+		<premio id="287" nombre="6 Aciertos + 2 Jackpot" >
+			<ganadores>VACANTE</ganadores>
+			<importe>183296431</importe>
+		</premio>
+		<premio id="288" nombre="6 Aciertos + 1 Jackpot" >
+			<ganadores>VACANTE</ganadores>
+			<importe>33771928</importe>
+		</premio>
+		<premio id="47" nombre="6 aciertos" >
+			<ganadores>VACANTE</ganadores>
+			<importe>7893810</importe>
+		</premio>
+	</juego>
+</sorteo>

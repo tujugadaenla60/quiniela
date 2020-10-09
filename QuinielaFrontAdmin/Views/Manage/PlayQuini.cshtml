@@ -1,0 +1,245 @@
+﻿@{
+    ViewBag.Title = "Jugada de Quini 6";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model QuinielaFrontAdmin.Models.PlayModel
+<section>
+    <div class="row">
+        <div class="col-md-12 card prod-p-card card-green">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="card-body text-white">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <h5><b>Jugada</b></h5>
+                            </div>
+                            <div class="col-md-4">
+                                <h3>@Html.Raw(Model.Id)</h3>
+                                <input type="hidden" id="hdnId" name="hdnId" value="@Html.Raw(Model.Id)" />
+                            </div>
+                            <div class="col-md-2">
+                                <h5><b>Fecha</b></h5>
+                            </div>
+                            <div class="col-md-4">
+                                <h3>@Html.Raw(Convert.ToDateTime(Model.CreatedOn).ToString("dd/MM/yyyy HH:mm"))</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <h5>Modalidad</h5>
+                            </div>
+                            <div class="col-md-4">
+                                <h3>@Html.Raw(Model.GameMode.Name)</h3>
+                            </div>
+                            <div class="col-md-2">
+                                <h5>Apuesta</h5>
+                            </div>
+                            <div class="col-md-4">
+                                <h3>@Html.Raw("$ " + Model.Total)</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <h5>Cliente</h5>
+                            </div>
+                            <div class="col-md-10">
+                                <h3>@Html.Raw(Model.Customer.Name)</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <h5>Sorteo</h5>
+                            </div>
+                            <div class="col-md-4">
+                                @*<h3>@Html.Raw(Convert.ToDateTime(Model.Draw.Date).ToString("dd/MM/yyyy HH:mm"))</h3>*@
+                                <select id="GameId" name="GameId" onchange="Filtrar();" class="form-control">
+                                    <option value="0">Todos</option>
+                                    @foreach (var item in ViewBag.Draws)
+                                    {
+                                        if (Model.Draw.Id.ToString() == item.Id.ToString())
+                                        {
+                                            <option value="@Html.Raw(item.Id)" selected>@Html.Raw(Convert.ToDateTime(item.Date).ToString("dd/MM/yyyy HH:mm"))</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@Html.Raw(item.Id)>@Html.Raw(Convert.ToDateTime(item.Date).ToString("dd/MM/yyyy HH:mm"))</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <h5>Premio</h5>
+                            </div>
+                            <div class="col-md-4">
+                                <h3>@Html.Raw("$ " + Model.Prize)</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 card-body text-center">
+                    <img src="~/img/quini6.png" alt="" width="100" height="70" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<section>
+    <div class="row">
+        <div class="col-md-6 card prod-p-card card-blue">
+            <div class="row">
+                <div class="col-md-12 card-body text-center text-white">
+                    <h3>Números</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 card-body text-center text-white">
+                    <h2>@Html.Raw(Model.QuiniDetail.Option1.ToString().PadLeft(2,'0'))</h2>
+                </div>
+                <div class="col-md-4 card-body text-center text-white">
+                    <h2>@Html.Raw(Model.QuiniDetail.Option2.ToString().PadLeft(2, '0'))</h2>
+                </div>
+                <div class="col-md-4 card-body text-center text-white">
+                    <h2>@Html.Raw(Model.QuiniDetail.Option3.ToString().PadLeft(2, '0'))</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 card-body text-center text-white">
+                    <h2>@Html.Raw(Model.QuiniDetail.Option4.ToString().PadLeft(2, '0'))</h2>
+                </div>
+                <div class="col-md-4 card-body text-center text-white">
+                    <h2>@Html.Raw(Model.QuiniDetail.Option5.ToString().PadLeft(2, '0'))</h2>
+                </div>
+                <div class="col-md-4 card-body text-center text-white">
+                    <h2>@Html.Raw(Model.QuiniDetail.Option6.ToString().PadLeft(2, '0'))</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-8">
+                    <button id="btnPendiente" name="btnPendiente" type="button" class="@Html.Raw((Model.Status.Name.Contains("Pendiente")) ? "btn-lg btn-warning btn-rounded btn-block" : "btn-lg btn-outline-warning btn-rounded btn-block")">
+                        <i class="ik ik-clock"></i>
+                        <span>Pendiente</span>
+                    </button>
+                    <br />
+                </div>
+                <div class="col-md-2">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-8">
+                    <button id="btnJugada" name="btnJugada" type="button" class="@Html.Raw((Model.Status.Name.Contains("Jugada")) ? "btn-lg btn-success btn-rounded btn-block" : "btn-lg btn-outline-success btn-rounded btn-block")"  data-target="#jugadaModal" data-toggle="modal">
+                        <i class="ik ik-check-circle"></i>
+                        Jugada
+                    </button>
+                    <br />
+                </div>
+                <div class="col-md-2">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-8">
+                    <button id="btnCancelada" name="btnCancelada" type="button" class="@Html.Raw((Model.Status.Name.Contains("Cancelada")) ? "btn-lg btn-danger btn-rounded btn-block" : "btn-lg btn-outline-danger btn-rounded btn-block")">
+                        <i class="ik ik-info"></i>
+                        Cancelada
+                    </button>
+                    <br />
+                </div>
+                <div class="col-md-2">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-8">
+                    <button id="btnVolver" name="btnVolver" type="button" class="btn-lg btn-outline-info btn-block">
+                        <i class="ik ik-skip-back"></i>
+                        Volver
+                    </button>
+                </div>
+                <div class="col-md-2">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal" tabindex="-1" role="dialog" id="jugadaModal" name="jugadaModal" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-title bg-green text-center">
+                <p><b>Ingrese Número de Ticket Oficial:</b></p>
+            </div>
+            <div class="modal-body text-center">
+                <input type="text" id="OfficialTicket" name="OfficialTicket" class="form-control" value="@Html.Raw(Model.OfficialTicket)" />
+            </div>
+            <div class="modal-footer">
+                <div class="row col-md-12 col-xs-12 text-center">
+                    <div class="col-md-6 col-xs-6">
+                        <button type="button" class="btn btn-primary" id="btnAceptar" name="btnAceptar">Aceptar</button>
+                    </div>
+                    <div class="col-md-6 col-xs-6">
+                        <button type="button" class="btn btn-secondary" id="btnCancelar" name="btnCancelar" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#btnPendiente").click(function (e) {
+            e.preventDefault();
+            StatusUpdate(1); //Pendiente
+        });
+        $("#btnAceptar").click(function(e) {
+            e.preventDefault();
+            StatusUpdate(2); //Jugada
+        });
+        $("#btnCancelada").click(function (e) {
+            e.preventDefault();
+            StatusUpdate(3); //Cancelada
+        });
+
+        $("#btnVolver").click(function (e) {
+            e.preventDefault();
+            window.location.href = "@Url.Action("Play", "Manage")";
+        });
+
+        //Cambia el Status de la Jugada Seleccionada
+        function StatusUpdate(StatusId) {
+            var PlayModel = {
+                "Id": $("#hdnId").val(),
+                "StatusId": StatusId, 
+                "OfficialTicket": $("#OfficialTicket").val()
+            };
+            $.ajax({
+            type: "POST",
+            url: "@Url.Action("StatusUpdate", "Manage")",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ play: PlayModel }),
+                success: function (data) {
+                    window.location.href = "@Url.Action("Play", "Manage")";
+                },
+            failure: function (errMsg) { alert(errMsg);}
+            });
+        }
+    });
+</script>

@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<sorteo numero="" fecha="2020-06-07 21:30:00">
+	<juego idT="12" nombre="Quini 6" tipoJuego="Siempre sale" canal="quini_6">
+		<dato nombre="numeros" >
+			<pos id="1">2</pos>
+			<pos id="2">3</pos>
+			<pos id="3">17</pos>
+			<pos id="4">38</pos>
+			<pos id="5">40</pos>
+			<pos id="6">43</pos>
+		</dato>
+		<premio id="144" nombre="6 aciertos" >
+			<ganadores></ganadores>
+			<importe></importe>
+		</premio>
+		<premio id="38" nombre="5 aciertos" >
+			<ganadores>2</ganadores>
+			<importe>745652</importe>
+		</premio>
+	</juego>
+</sorteo>

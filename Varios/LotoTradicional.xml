@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<sorteo numero="" fecha="2020-06-06 22:00:00">
+	<juego idT="9" nombre="Loto Plus" tipoJuego="Tradicional" canal="loto">
+		<dato nombre="numeros" >
+			<pos id="1">6</pos>
+			<pos id="2">11</pos>
+			<pos id="3">18</pos>
+			<pos id="4">23</pos>
+			<pos id="5">24</pos>
+			<pos id="6">37</pos>
+		</dato>
+		<dato nombre="Pozo_estimado_proxima_jugada" >
+			<pos id="1">308000000</pos>
+		</dato>
+		<dato nombre="Jackpot" >
+			<pos id="1">8</pos>
+			<pos id="2">9</pos>
+		</dato>
+		<premio id="43" nombre="4 Aciertos + 1 Jackpot" >
+			<ganadores></ganadores>
+			<importe></importe>
+		</premio>
+		<premio id="44" nombre="4 Aciertos + 2 Jackpot" >
+			<ganadores></ganadores>
+			<importe></importe>
+		</premio>
+		<premio id="45" nombre="5 Aciertos" >
+			<ganadores></ganadores>
+			<importe></importe>
+		</premio>
+		<premio id="219" nombre="5 Aciertos + 1 Jackpot" >
+			<ganadores>12</ganadores>
+			<importe>19500</importe>
+		</premio>
+		<premio id="220" nombre="5 Aciertos + 2 Jackpot" >
+			<ganadores>VACANTE</ganadores>
+			<importe>52000</importe>
+		</premio>
+		<premio id="221" nombre="6 Aciertos" >
+			<ganadores>VACANTE</ganadores>
+			<importe>7893810</importe>
+		</premio>
+		<premio id="222" nombre="6 Aciertos + 1 Jackpot" >
+			<ganadores>VACANTE</ganadores>
+			<importe>33771928</importe>
+		</premio>
+		<premio id="223" nombre="6 Aciertos + 2 Jackpot" >
+			<ganadores>VACANTE</ganadores>
+			<importe>183296431</importe>
+		</premio>
+		<premio id="296" nombre="4 Aciertos" >
+			<ganadores></ganadores>
+			<importe></importe>
+		</premio>
+		<premio id="42" nombre="3 Aciertos + 2 Jackpot" >
+			<ganadores></ganadores>
+			<importe></importe>
+		</premio>
+		<premio id="297" nombre="3 Aciertos + 1 Jackpot" >
+			<ganadores></ganadores>
+			<importe></importe>
+		</premio>
+		<premio id="298" nombre="3 Aciertos" >
+			<ganadores></ganadores>
+			<importe></importe>
+		</premio>
+	</juego>
+</sorteo>

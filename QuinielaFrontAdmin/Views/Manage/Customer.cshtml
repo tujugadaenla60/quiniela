@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "Customer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model List<QuinielaFrontAdmin.Models.CustomerModel>
+<br />
+<h2>Clientes</h2>
+
+<div class="row">
+    <div class="col-md-2">
+        <label><b>Nombre:</b></label>
+        <input tye="text" id="Name" name="Name" class="form-control" />
+    </div>
+    <div class="col-md-2">
+        <label><b>Documento:</b></label>
+        <input tye="text" id="IdentificationNumber" name="IdentificationNumber" class="form-control" />
+    </div>
+    <div class="col-md-2">
+        <label><b>Teléfono:</b></label>
+        <input tye="text" id="PhoneNumber" name="PhoneNumber" class="form-control" />
+    </div>
+    <div class="col-md-2">
+        <label><b>Localidad:</b></label>
+        <select id="StateCityId" name="StateCityId" class="form-control" onchange="Filtrar();">
+            <option value="0">Todas</option>
+            @foreach (var item in ViewBag.StateCities)
+            {
+                if (Request.QueryString["StateCityId"] != null && Request.QueryString["StateCityId"].ToString() == item.Id.ToString())
+                {
+                    <option value="@Html.Raw(item.Id)" selected>@Html.Raw(item.Name)</option>
+                }
+                else
+                {
+                    <option value=@Html.Raw(item.Id)>@Html.Raw(item.Name)</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-md-2">
+        <div class="row">
+            <div class="col-md-12">
+                <label><b>Saldo Positivo</b></label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="checkbox" id="PositiveBalance" name="PositiveBalance" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <table id="data_tables" class="table dataTable no-footer" role="grid" aria-describedby="data_table_info">
+            <thead>
+                <tr role="row">
+                    <th class="nosort sorting_disabled">Foto</th>
+                    <th class="nosort sorting_disabled" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Id: activate to sort column descending" style="width: 200px;">Nombre</th>
+                    <th class="nosort sorting_disabled" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" style="width: 209px;">Teléfono</th>
+                    <th class="nosort sorting_disabled" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending" style="width: 321px;">Email</th>
+                    <th class="nosort sorting_disabled" rowspan="1" colspan="1" aria-label="&amp;nbsp;" style="width: 176px;">Documento</th>
+                    <th class="nosort sorting_disabled" rowspan="1" colspan="1" aria-label="&amp;nbsp;" style="width: 100px;">Localidad</th>
+                    <th class="nosort sorting_disabled" rowspan="1" colspan="1" aria-label="&amp;nbsp;" style="width: 100px;">Saldo</th>
+                    <th class="nosort sorting_disabled text-center" rowspan="1" colspan="1" aria-label="&amp;nbsp;" style="width: 176px;">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr role="row">
+                        <td><img src="../img/users/1.jpg" class="table-user-thumb" alt=""></td>
+                        <td>@Html.Raw(item.Name)</td>
+                        <td>@Html.Raw(item.PhoneNumber)</td>
+                        <td>@Html.Raw(item.Email)</td>
+                        <td>@Html.Raw(item.IdentificationNumber)</td>
+                        <td>@Html.Raw((item.StateCity != null) ? item.StateCity.Name : "")</td>
+                        <td>@Html.Raw(item.Balance)</td>
+                        <td>
+                            <div class="table-actions text-center">
+                                <a href="@Url.Action("CustomerEdit", "Manage", new { Id = item.Id })" title="Editar"><i class="ik ik-edit"></i></a>
+                                <a href="#"><i class="ik ik-trash-2" title="Eliminar"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function Filtrar() {
+        var Name = document.getElementById("Name").value;
+        var IdentificationNumber = document.getElementById("IdentificationNumber").value;
+        var PhoneNumber = document.getElementById("PhoneNumber").value;
+        var StateCityId = document.getElementById("StateCityId").value;
+        var PositiveBalance = document.getElementById("PositiveBalance").value;
+        window.location.href = "@Url.Action("Customer", "Manage")" + "?Name=" + Name + "&IdentificationNumber=" + IdentificationNumber + "&PhoneNumber=" + PhoneNumber + "&StateCityId=" + StateCityId + "&PositiveBalance=" + PositiveBalance;
+    }
+    $(document).ready(function () {
+        $("#Name").change(function () {
+            Filtrar();
+        });
+        $("#IdentificationNumber").change(function () {
+            Filtrar();
+        });
+        $("#PhoneNumber").change(function () {
+            Filtrar();
+        });
+        $("#StateCityId").change(function () {
+            Filtrar();
+        });
+    });
+</script>
